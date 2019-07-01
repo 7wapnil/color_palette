@@ -1,0 +1,8 @@
+<h1>Color Palette App</h1>
+
+<% if flash[:notification] %>
+  <li><%= flash[:notification] %></li>
+<% end %>
+
+<%= link_to 'Log in', login_path %> | 
+<%= link_to 'Sign up for ColorPalette', signup_path %>
