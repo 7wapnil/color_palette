@@ -1,0 +1,19 @@
+<%= render 'common/errors', resource: @color %>
+
+<%= form_for @color do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :color %><br>
+    <%= f.color_field :hex_code, id: "color-input" %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<p align="center">
+  [ <%= link_to "Cancel request and goto available colors", colors_path %> ]
+</p>
