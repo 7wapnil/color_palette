@@ -4,6 +4,10 @@ class ColorsController < ApplicationController
     @colors = Color.all
   end
 
+  def show
+    @color = Color.find(params[:id])
+  end
+
   def new
     @color = Color.new
   end
@@ -30,6 +34,12 @@ class ColorsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @color = Color.find(params[:id])
+    @color.delete
+    redirect_to colors_path 
   end
 
   private

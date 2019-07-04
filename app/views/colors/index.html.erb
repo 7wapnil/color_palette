@@ -1,19 +1,19 @@
-<h1 align="center">Color list</h1>
+<h1 align="center">Colors</h1>
 
-<%= link_to "Add new color", new_color_path, class: "btn btn-md btn-primary" %>
+<%= link_to "Add new color", new_color_path, class: "btn btn-md btn-primary" %><br><br>
+<div class="row">
 <% @colors.each do |color| %>
-  <div class="row">
-      <div class="col-xs-4">
-        <div class="thumbnail">
-          <div style="background-color: <%= color.hex_code %>">
-          <div class="caption">
-            <h3><%= color.name %></h3>
-            <p>...</p>
-            <p>
-              <%= link_to "Edit", edit_color_path(color), class: "btn btn-primary" %>
-              <a href="#" class="btn btn-default" role="button">Button</a></p>
-          </div>
-        </div>
+  <div class="col-xs-6 col-md-3">
+    <div class="thumbnail">
+      <%= link_to color_path(color) do %>
+        <div style="background-color: <%= color.hex_code %>; height: 150px"></div>
+      <% end %>
+      <div class="caption">
+        <strong><%= color.name.capitalize %></strong>
+        <p>[ <%= link_to color.hex_code, color_path(color) %> ]</p>
+        <%= render 'color_actions', color: color %>
       </div>
+    </div>
   </div>
 <% end %>
+</div>

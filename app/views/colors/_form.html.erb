@@ -1,19 +1,34 @@
 <%= render 'common/errors', resource: @color %>
 
-<%= form_for @color do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :color %><br>
-    <%= f.color_field :hex_code, id: "color-input" %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_for(@color, :html => { class: "form-horizontal", role: "form" }) do |f| %>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= f.label :name %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.text_field :name, class: "form-control", placeholder: "Name of color", autofocus: true %>
+        </div>
+      </div>
 
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= f.label :color %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.color_field :hex_code, id: "color-input" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-12">
+          <%= f.submit class: "btn btn-primary btn-lg" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 <p align="center">
   [ <%= link_to "Cancel request and goto available colors", colors_path %> ]
 </p>
