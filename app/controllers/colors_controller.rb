@@ -20,7 +20,7 @@ class ColorsController < ApplicationController
     @color = Color.new(color_params)
     if @color.save
       flash[:success] = 'Color created successfully'
-      redirect_to user_path(current_user)
+      redirect_to colors_path
     else
       render :new
     end
