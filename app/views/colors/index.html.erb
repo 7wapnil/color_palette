@@ -2,7 +2,7 @@
 
 <%= link_to "Add new color", new_color_path, class: "btn btn-md btn-primary" %><br><br>
 <div class="row">
-<% @colors.each do |color| %>
+<% @colors.order("updated_at DESC").each do |color| %>
   <div class="col-xs-6 col-md-3">
     <div class="thumbnail">
       <%= link_to color_path(color) do %>

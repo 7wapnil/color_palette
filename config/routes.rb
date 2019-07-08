@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   resources :users, except: [:new]
 
   resources :colors
+
+  resources :palettes
 end

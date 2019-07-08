@@ -2,10 +2,11 @@
 
 class User < ApplicationRecord
   has_secure_password
+  has_many :palettes
 
   before_save :downcase_email
   validates :name, presence: true,
-                   length: { minimum: 3, maximum: 25 },
+                   length: { in: 3..25 },
                    uniqueness: { case_sensitive: false }
   VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]{2,}+\z/i
                       .freeze
