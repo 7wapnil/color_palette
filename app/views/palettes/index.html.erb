@@ -1,19 +1,31 @@
 <h1 align="center" >Palettes</h1>
-<%= link_to "Add new palette", new_palette_path, class: "btn btn-md btn-primary" %><br><br>
+<p id="msg"></p>
 <div class="row">
-<% @palettes.order("updated_at DESC").each do |palette| %>
-  <div class="col-xs-6 col-md-3">
-    <div class="thumbnail">
-      <%= link_to palette_path(palette) do %>
-        <% palette.colors.each do |color| %>
-          <div style="background-color: <%= color.hex_code %>; height: 50px;"></div>
-        <% end %>
-      <% end %>
-      <div class="caption">
-        <strong><%= link_to palette.name.capitalize, palette_path(palette) %></strong>
-        <%= render 'palette_actions', palette: palette %>
-      </div>
-    </div>
+  <div class="col-md-3">
+    <%= link_to "Add new palette", new_palette_path, class: "btn btn-md btn-primary" %>
   </div>
-<% end %>
+  <div class="col-md-6">
+    <form align="center">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search palette" id="search-palette" >
+      </div>
+    </form>
+  </div>
 </div>
+<div class="row">
+  <div id='palette-section'>
+    <%= render partial: 'palettes'%>
+  </div>  
+</div>
+
+<script>
+  $(document).on('keyup','#search-palette',function (){
+    var keyword = $(this).val();
+    // document.getElementById('msg').innerHTML = keyword
+    $.ajax({
+      method: "GET",
+      url: "palettes/search",
+      data: { keyword: keyword }
+    });
+  });
+</script>  

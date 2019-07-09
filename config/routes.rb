@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   delete 'logout' => 'sessions#destroy'
 
+  get 'palettes/search' => 'palettes#search'
+
   resources :users, except: [:new]
 
   resources :colors

@@ -2,7 +2,7 @@ class Palette < ApplicationRecord
   has_many :palette_colors
   has_many :colors, through: :palette_colors
   #has_and_belongs_to_many :colors
-  accepts_nested_attributes_for :palette_colors, :reject_if => proc { |attributes| }
+  accepts_nested_attributes_for :palette_colors
 
   before_save :downcase_name
 

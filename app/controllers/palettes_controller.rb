@@ -22,7 +22,6 @@ class PalettesController < ApplicationController
       flash[:success] = "Your palette has been created successfully."
       redirect_to palettes_path
     else
-      flash.now[:danger] = @palette.errors.full_messages.join("<br>").html_safe
       render :new
     end
   end
@@ -46,6 +45,10 @@ class PalettesController < ApplicationController
       flash.now[:danger] =  @palette.errors.full_messages.join("<br>").html_safe
       render :index
     end
+  end
+
+  def search
+    @palettes = Palette.all.where("name like ?", "%#{params[:keyword]}%")
   end
 
   private
