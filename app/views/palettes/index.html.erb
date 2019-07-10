@@ -2,7 +2,9 @@
 <p id="msg"></p>
 <div class="row">
   <div class="col-md-3">
+    <% if user_signed_in? %>
     <%= link_to "Add new palette", new_palette_path, class: "btn btn-md btn-primary" %>
+    <% end %>
   </div>
   <div class="col-md-6">
     <form align="center">
@@ -21,7 +23,6 @@
 <script>
   $(document).on('keyup','#search-palette',function (){
     var keyword = $(this).val();
-    // document.getElementById('msg').innerHTML = keyword
     $.ajax({
       method: "GET",
       url: "palettes/search",

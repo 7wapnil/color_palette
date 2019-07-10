@@ -1,6 +1,7 @@
 <h1 align="center">Colors</h1>
-
-<%= link_to "Add new color", new_color_path, class: "btn btn-md btn-primary" %><br><br>
+<% if user_signed_in? %>
+  <%= link_to "Add new color", new_color_path, class: "btn btn-md btn-primary" %><br><br>
+<% end %>
 <div class="row">
 <% @colors.order("updated_at DESC").each do |color| %>
   <div class="col-xs-6 col-md-3">

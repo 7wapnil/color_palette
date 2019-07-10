@@ -16,7 +16,7 @@
       <ul class="nav navbar-nav">
         <li><%= link_to "Palettes", palettes_path %></li>
         <li><%= link_to "Colors", colors_path %></li>
-        <% if logged_in? %>
+        <% if user_signed_in? %>
           <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Create <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -39,18 +39,18 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form> -->
       <ul class="nav navbar-nav navbar-right">
-        <% if !logged_in? %>
-          <li><%= link_to "Login", login_path %></li>
+        <% if !user_signed_in? %>
+          <li><%= link_to "Login", new_user_session_path %></li>
         <% end %>
-        <% if logged_in? %>
+        <% if user_signed_in? %>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name.split.map(&:capitalize).join(" ") %>&nbsp;<span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.email %>&nbsp;<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Edit profile", edit_user_path(current_user) %></li>
+              <li><%= link_to "Edit profile", edit_user_registration_path(current_user) %></li>
               <li><a href="#">Your Palettes</a></li>
               <li><a href="#">Something else here</a></li>
               <li role="separator" class="divider"></li>
-              <li><%= link_to "Logout", logout_path, method: :delete %></li>
+              <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
             </ul>
           </li>
         <% end %>
