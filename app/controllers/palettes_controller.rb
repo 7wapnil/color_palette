@@ -19,6 +19,7 @@ class PalettesController < ApplicationController
   def create
     @palette = Palette.new(palette_params)
     if @palette.save
+      UserPaletteMailer.palette_creation_email(current_user).deliver_later
       flash[:success] = "Your palette has been created successfully."
       redirect_to palettes_path
     else

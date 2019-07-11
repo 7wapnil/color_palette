@@ -6,6 +6,11 @@
     <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="field">
+        <%= image_tag resource.avatar, class: "img-circle", style: "width: 150px; height: 150px" %><br /><br />
+        <%= f.file_field :avatar %>
+      </div>
+
+      <div class="field">
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       </div>
