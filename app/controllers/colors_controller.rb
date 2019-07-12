@@ -1,20 +1,18 @@
 class ColorsController < ApplicationController
+
+  before_action :current_color, only: [:show, :edit, :update, :destroy]
   
   def index
-    @colors = Color.all
+    @colors = Color.paginate(page: params[:page], per_page: 4)
   end
 
-  def show
-    @color = Color.find(params[:id])
-  end
+  def show; end
 
   def new
     @color = Color.new
   end
 
-  def edit
-    @color = Color.find(params[:id])
-  end
+  def edit; end
 
   def create
     @color = Color.new(color_params)
@@ -27,7 +25,6 @@ class ColorsController < ApplicationController
   end
 
   def update
-    @color = Color.find(params[:id])
     if @color.update(color_params)
       flash[:success] = "Color details updated successfully"
       redirect_to colors_path
@@ -37,7 +34,6 @@ class ColorsController < ApplicationController
   end
 
   def destroy
-    @color = Color.find(params[:id])
     @color.delete
     redirect_to colors_path 
   end
@@ -46,5 +42,9 @@ class ColorsController < ApplicationController
 
   def color_params
     params.require(:color).permit(:name, :hex_code)
+  end
+
+  def current_color
+    @color = Color.find(params[:id])
   end
 end

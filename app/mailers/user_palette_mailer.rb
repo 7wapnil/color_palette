@@ -6,4 +6,9 @@ class UserPaletteMailer < ApplicationMailer
     mail(to: @user.email, subject: "Palette created")
   end
 
+  def palette_deletion_email(user)
+    @user = user
+    mail(to: @user.email, subject: "Palette deleted")
+  end
+
 end

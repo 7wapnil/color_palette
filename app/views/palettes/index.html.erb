@@ -1,4 +1,4 @@
-<h1 align="center" >Palettes</h1>
+<h1 align="center">Palettes</h1>
 <p id="msg"></p>
 <div class="row">
   <div class="col-md-3">
@@ -19,6 +19,7 @@
     <%= render partial: 'palettes'%>
   </div>  
 </div>
+<%= will_paginate @palettes, renderer: BootstrapPagination::Rails %>
 
 <script>
   $(document).on('keyup','#search-palette',function (){
