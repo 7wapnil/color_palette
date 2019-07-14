@@ -2,6 +2,6 @@
 	<div class="jb-content">
 		<h1>Color palette!</h1>
   <p></p>
-  <p><%= link_to 'Sign up for ColorPalette', new_user_registration_path , class: "btn btn-primary btn-lg" %></p>
+  <p><%= link_to('Sign up for ColorPalette', new_user_registration_path , class: "btn btn-primary btn-lg") unless user_signed_in? %></p>
 	</div>
 </div>
