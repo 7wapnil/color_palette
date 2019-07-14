@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -13,8 +15,9 @@ class User < ApplicationRecord
   private
 
   def valid_image_type
-    if avatar.attached? && !avatar.content_type.in?("%w(image/jpeg image/png)")
-      errors.add(:avatar, "Only JPEG and PNG formats are allowed.!")
-    end
+    return unless avatar.attached? && !avatar.content_type
+                                             .in?(%w[image/jpeg image/png])
+
+    errors.add(:avatar, 'Only JPEG and PNG formats are allowed.!')
   end
 end

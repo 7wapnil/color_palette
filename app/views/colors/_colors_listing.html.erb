@@ -1,0 +1,23 @@
+<% if @colors.present? %>
+  <div class="row">
+  <% @colors.order("updated_at DESC").each do |color| %>
+    <div class="col-xs-6 col-md-3">
+      <div class="thumbnail">
+        <%= link_to color_path(color) do %>
+          <div style="background-color: <%= color.hex_code %>; height: 150px"></div>
+        <% end %>
+        <div class="caption">
+          <strong><%= color.name.capitalize %></strong>
+          <p>[ <%= link_to color.hex_code, color_path(color) %> ]</p>
+          <%= render 'color_actions', color: color %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
+  <div class="row">
+    <%= will_paginate @colors, renderer: BootstrapPagination::Rails %>
+  </div>
+<% else %>
+  <h1>No search result found :(</h1>
+<% end %>

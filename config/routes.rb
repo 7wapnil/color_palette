@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get 'palettes/search' => 'palettes#search'
 
+  get 'colors/search' => 'colors#search'
+
   resources :colors
 
   resources :palettes

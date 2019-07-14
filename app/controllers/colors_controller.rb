@@ -1,9 +1,10 @@
-class ColorsController < ApplicationController
+# frozen_string_literal: true
 
-  before_action :current_color, only: [:show, :edit, :update, :destroy]
-  
+class ColorsController < ApplicationController
+  before_action :current_color, only: %i[show edit update destroy]
+
   def index
-    @colors = Color.paginate(page: params[:page], per_page: 4)
+    @colors = Color.paginate(page: params[:page])
   end
 
   def show; end
@@ -26,7 +27,7 @@ class ColorsController < ApplicationController
 
   def update
     if @color.update(color_params)
-      flash[:success] = "Color details updated successfully"
+      flash[:success] = 'Color details updated successfully'
       redirect_to colors_path
     else
       render :edit
@@ -34,8 +35,19 @@ class ColorsController < ApplicationController
   end
 
   def destroy
-    @color.delete
-    redirect_to colors_path 
+    if @color.destroy
+      flash[:success] = 'Color deleted successfully'
+      redirect_to colors_path
+    else
+      flash.now[:danger] = @color.errors.full_messages.join('<br>').html_safe
+      render :index
+    end
+  end
+
+  def search
+    @colors = Color.all
+                   .where('name like ?', "%#{params[:keyword]}%")
+                   .paginate(page: params[:page])
   end
 
   private

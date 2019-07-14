@@ -16,13 +16,12 @@
 </div>
 <div class="row">
   <div id='palette-section'>
-    <%= render partial: 'palettes'%>
+    <%= render partial: 'palettes_listing'%>
   </div>  
 </div>
-<%= will_paginate @palettes, renderer: BootstrapPagination::Rails %>
 
 <script>
-  $(document).on('keyup','#search-palette',function (){
+  $(document).on('keyup', '#search-palette', function (){
     var keyword = $(this).val();
     $.ajax({
       method: "GET",

@@ -1,21 +1,31 @@
 <h1 align="center">Colors</h1>
-<% if user_signed_in? %>
-  <%= link_to "Add new color", new_color_path, class: "btn btn-md btn-primary" %><br><br>
-<% end %>
 <div class="row">
-<% @colors.order("updated_at DESC").each do |color| %>
-  <div class="col-xs-6 col-md-3">
-    <div class="thumbnail">
-      <%= link_to color_path(color) do %>
-        <div style="background-color: <%= color.hex_code %>; height: 150px"></div>
-      <% end %>
-      <div class="caption">
-        <strong><%= color.name.capitalize %></strong>
-        <p>[ <%= link_to color.hex_code, color_path(color) %> ]</p>
-        <%= render 'color_actions', color: color %>
-      </div>
-    </div>
+  <div class="col-md-3">
+    <% if user_signed_in? %>
+      <%= link_to "Add new color", new_color_path, class: "btn btn-md btn-primary" %>
+    <% end %>
   </div>
-<% end %>
+  <div class="col-md-6">
+    <form align="center">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search color" id="search-color" >
+      </div>
+    </form>
+  </div>
 </div>
-<%= will_paginate @colors, renderer: BootstrapPagination::Rails %>
+<div class="row">
+  <div id="color-section">
+    <%= render partial: 'colors_listing' %>
+  </div>
+</div>
+
+<script>
+  $(document).on('keyup', '#search-color', function(){
+    var keyword = $(this).val();
+    $.ajax({
+      method: 'GET',
+      url: 'colors/search',
+      data: { keyword: keyword }
+    });
+  });
+</script>
