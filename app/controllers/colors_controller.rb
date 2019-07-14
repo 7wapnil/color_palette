@@ -2,6 +2,8 @@
 
 class ColorsController < ApplicationController
   before_action :current_color, only: %i[show edit update destroy]
+  before_action :authenticate_user!
+
 
   def index
     @colors = Color.paginate(page: params[:page])

@@ -1,24 +1,29 @@
 <% if @palettes.present? %>
   <div class="row">
+  <table class="table">
+    <tr>
+      <th>Palette name</th>
+      <th>Swatches</th>
+      <th>Actions</th>
+    </tr>
     <% @palettes.order("updated_at DESC").each do |palette| %>
-      <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-          <%= link_to palette_path(palette) do %>
-            <% palette.colors.each do |color| %>
-              <div style="background-color: <%= color.hex_code %>; height: 50px;"></div>
-            <% end %>
+    <tr>
+      <td><%= link_to palette.name.capitalize, palette_path(palette) %></td>
+      <td>
+        <% palette.colors.each do |color| %>
+          <%= link_to color_path(color) do %>
+            <div id="swatch-color-div" style="background-color: <%= color.hex_code %>;"></div>
           <% end %>
-          <div class="caption">
-            <strong><%= link_to palette.name.capitalize, palette_path(palette) %></strong>
-            <%= render 'palette_actions', palette: palette %>
-          </div>
-        </div>
-      </div>
+        <% end %>
+      </td>
+      <td><%= render 'palette_actions', palette: palette %></td>
+    </tr>
     <% end %>
-  </div>
+  </table>
+</div>
   <div class="row">
     <%= will_paginate @palettes, renderer: BootstrapPagination::Rails %>
   </div>
 <% else %>
-  <h1>No search result found :(</h1>
+  <h1>No search results found :(</h1>
 <% end %>
