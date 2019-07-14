@@ -1,0 +1,31 @@
+<h1 align="center">Colors</h1>
+<div class="row">
+  <div class="col-md-3">
+    <% if user_signed_in? %>
+      <%= link_to "Add new color", new_color_path, class: "btn btn-md btn-primary" %>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <form align="center">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search color" id="search-color" >
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div id="color-section">
+    <%= render partial: 'colors_listing' %>
+  </div>
+</div>
+
+<script>
+  $(document).on('keyup', '#search-color', function(){
+    var keyword = $(this).val();
+    $.ajax({
+      method: 'GET',
+      url: 'colors/search',
+      data: { keyword: keyword }
+    });
+  });
+</script>

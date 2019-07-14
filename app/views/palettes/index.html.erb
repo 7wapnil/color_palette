@@ -1,0 +1,32 @@
+<h1 align="center">Palettes</h1>
+<p id="msg"></p>
+<div class="row">
+  <div class="col-md-3">
+    <% if user_signed_in? %>
+    <%= link_to "Add new palette", new_palette_path, class: "btn btn-md btn-primary" %>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <form align="center">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search palette" id="search-palette" >
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div id='palette-section'>
+    <%= render partial: 'palettes_listing'%>
+  </div>  
+</div>
+
+<script>
+  $(document).on('keyup', '#search-palette', function (){
+    var keyword = $(this).val();
+    $.ajax({
+      method: "GET",
+      url: "palettes/search",
+      data: { keyword: keyword }
+    });
+  });
+</script>  

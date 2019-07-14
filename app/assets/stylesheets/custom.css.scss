@@ -1,0 +1,36 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+#logo {
+	color: teal;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.navbar {
+	
+}
+
+.jumbotron {
+	background-image: asset-url('fly.png');
+	background-size: cover;
+	height: 550px;
+}
+
+.jumbotron h1 {
+	color: white;
+}
+
+.center {
+	text-align: center;
+}
+
+.jb-content {
+	position: relative;
+	top: 70px;
+}
+
+#color-input {
+	width: 177px;
+	height: 177px;
+}

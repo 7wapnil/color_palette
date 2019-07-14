@@ -1,0 +1,18 @@
+<%= nested_form_for @palette do |f| %>
+ <p>
+   <%= f.label :palette_name %><br>
+   <%= f.text_field :name %>
+ </p>
+ <p>
+  <%= f.label :add_colors %><br>
+  <%= f.fields_for :palette_colors do |color_palette| %>
+     <%= color_palette.select(:color_id, options_from_collection_for_select(Color.all, :id, :name, color_palette.object.color_id)) %>
+     <%= color_palette.link_to_remove "Remove" %>
+  <% end %>
+   <%= f.link_to_add "Add a color", :palette_colors %>
+ </p>
+
+ <p>
+   <%= f.submit %>
+ </p>
+<% end %>
